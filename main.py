@@ -233,4 +233,4 @@ async def portscan(ctx, ip_address: str, start: int, end: int):
     await ctx.send(f"Open ports on {ip_address}: {', '.join(map(str, open_ports)) if open_ports else 'None'}")
 
 
-client.run("ODQ0NzcwOTIzNTM3MzY3MDgw.GM9GR-.ChqMHfzcw9ygnKY2PTMUgtCnBqFyGXl4VVVXzk", bot=False)
+client.run("MTI5NjQ2MTI4ODk1MTY0ODI2Ng.GhYQNd.my_CQt9MrMf8VLb-4H3MoWYb24u7W3y_2kU3Sw", bot=False)
