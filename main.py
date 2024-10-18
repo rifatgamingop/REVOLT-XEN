@@ -5,6 +5,7 @@ import asyncio
 from discord.ext import commands, tasks
 
 client = commands.Bot(command_prefix="=", self_bot=True)
+token = input("Give Your ID Token: ")
 
 @client.event
 async def on_ready():
@@ -233,4 +234,4 @@ async def portscan(ctx, ip_address: str, start: int, end: int):
     await ctx.send(f"Open ports on {ip_address}: {', '.join(map(str, open_ports)) if open_ports else 'None'}")
 
 
-client.run("MTI5NjQ2MTI4ODk1MTY0ODI2Ng.GGhEKM.6W3ovQFxw3z8RMq9BgtLc0ggNQqn3YVuOLk2Fg", bot=False)
+client.run(token, bot=False)
