@@ -61,15 +61,6 @@ async def stopreact(ctx):
     await ctx.send("Auto-react is now OFF!", delete_after=5)  # Optional: delete message after 5 seconds
 
 # Event listener to react to all messages when auto-reaction is enabled
-@client.event
-async def on_message(message):
-    global auto_react, reaction_emoji
-    if auto_react and reaction_emoji and message.author == client.user:  # Check if auto-react is enabled and emoji is set
-        try:
-            await message.add_reaction(reaction_emoji)  # Add the emoji as a reaction
-        except discord.errors.InvalidArgument:
-            print(f"Invalid emoji: {reaction_emoji}")
-    await client.process_commands(message)  # Process other commands
 
 auto_reply = False
 opponent = None
@@ -93,7 +84,9 @@ async def stopreply(ctx):
 # Event listener to auto-reply to messages from the opponent
 @client.event
 async def on_message(message):
-    global auto_reply, opponent
+    global auto_reply, opponent, auto_react, reaction_emoji
+    
+    # Auto-reply functionality
     if auto_reply and opponent and message.author == opponent and not message.author.bot:
         # Example auto-replies
         replies = [
@@ -108,7 +101,14 @@ async def on_message(message):
         reply = random.choice(replies)
         await message.channel.send(reply)
     
-    await client.process_commands(message)  # Process other commands
+    # Auto-react functionality
+    if auto_react and reaction_emoji and message.author == client.user:
+        try:
+            await message.add_reaction(reaction_emoji)
+        except discord.errors.InvalidArgument:
+            print(f"Invalid emoji: {reaction_emoji}")
+    
+    await client.process_commands(message)
 
 # Global variables to manage the loop and group ID
 gc_loop_running = False
